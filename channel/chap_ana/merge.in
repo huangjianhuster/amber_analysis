@@ -1,0 +1,7 @@
+parm final.prmtop [sys]
+trajin 8_prod1_TMaligned.xtc parm [sys]
+trajin 8_prod2_TMaligned.xtc parm [sys]
+trajin 8_prod3_TMaligned.xtc parm [sys]
+
+trajout all_merged_TMaligned.xtc xtc
+run
