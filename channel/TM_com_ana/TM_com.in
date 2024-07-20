@@ -1,0 +1,49 @@
+parm final.prmtop [lig_system]
+trajin 8_prod1.nc 1 last parm [lig_system]
+trajin 8_prod2.nc 1 last parm [lig_system]
+trajin 8_prod3.nc 1 last parm [lig_system]
+autoimage anchor "::A,B,C,D,E,F,G,H"
+
+parm apo.prmtop [apo_system]
+reference 7_eq_apo.pdb parm [apo_system]
+
+# alignment
+rms "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG) & (:;64-86,295-321,353-377,383-406,409-448,457-469,472-483,488-525) & (@CA,C,N,O)" reference
+
+# calculate TM center of mass
+vector A_TM1 mask out TM1_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::A,E) & (:;64-86) & (!@H=)"  
+vector A_TM2 mask out TM2_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::A,E) & (:;295-321) & (!@H=)"  
+vector A_TM3 mask out TM3_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::A,E) & (:;353-377) & (!@H=)"  
+vector A_TM4 mask out TM4_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::A,E) & (:;383-406) & (!@H=)"  
+vector A_TM5 mask out TM5_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::A,E) & (:;409-448) & (!@H=)"  
+vector A_PH1 mask out PH1_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::A,E) & (:;457-469) & (!@H=)"  
+vector A_PH2 mask out PH2_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::A,E) & (:;472-483) & (!@H=)"  
+vector A_TM6 mask out TM6_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::A,E) & (:;488-525) & (!@H=)"  
+
+vector B_TM1 mask out TM1_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::B,F) & (:;64-86) & (!@H=)"  
+vector B_TM2 mask out TM2_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::B,F) & (:;295-321) & (!@H=)"  
+vector B_TM3 mask out TM3_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::B,F) & (:;353-377) & (!@H=)"  
+vector B_TM4 mask out TM4_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::B,F) & (:;383-406) & (!@H=)"  
+vector B_TM5 mask out TM5_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::B,F) & (:;409-448) & (!@H=)"  
+vector B_PH1 mask out PH1_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::B,F) & (:;457-469) & (!@H=)"  
+vector B_PH2 mask out PH2_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::B,F) & (:;472-483) & (!@H=)"  
+vector B_TM6 mask out TM6_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::B,F) & (:;488-525) & (!@H=)"  
+
+vector C_TM1 mask out TM1_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::C,G) & (:;64-86) & (!@H=)"  
+vector C_TM2 mask out TM2_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::C,G) & (:;295-321) & (!@H=)"  
+vector C_TM3 mask out TM3_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::C,G) & (:;353-377) & (!@H=)"  
+vector C_TM4 mask out TM4_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::C,G) & (:;383-406) & (!@H=)"  
+vector C_TM5 mask out TM5_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::C,G) & (:;409-448) & (!@H=)"  
+vector C_PH1 mask out PH1_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::C,G) & (:;457-469) & (!@H=)"  
+vector C_PH2 mask out PH2_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::C,G) & (:;472-483) & (!@H=)"  
+vector C_TM6 mask out TM6_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::C,G) & (:;488-525) & (!@H=)"  
+
+vector D_TM1 mask out TM1_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::D,H) & (:;64-86) & (!@H=)"  
+vector D_TM2 mask out TM2_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::D,H) & (:;295-321) & (!@H=)"  
+vector D_TM3 mask out TM3_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::D,H) & (:;353-377) & (!@H=)"  
+vector D_TM4 mask out TM4_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::D,H) & (:;383-406) & (!@H=)"  
+vector D_TM5 mask out TM5_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::D,H) & (:;409-448) & (!@H=)"  
+vector D_PH1 mask out PH1_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::D,H) & (:;457-469) & (!@H=)"  
+vector D_PH2 mask out PH2_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::D,H) & (:;472-483) & (!@H=)"  
+vector D_TM6 mask out TM6_com_prod1.dat "(::A,B,C,D,E,F,G,H) & (!:AQV,ZB4,LIG)" "(::D,H) & (:;488-525) & (!@H=)"  
+run
