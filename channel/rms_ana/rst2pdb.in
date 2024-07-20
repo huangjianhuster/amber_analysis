@@ -1,0 +1,5 @@
+parm final.prmtop
+trajin 7_eq.rst
+autoimage anchor "::A,B,C,D,E,F,G,H"
+trajout 7_eq.pdb PDB
+run
