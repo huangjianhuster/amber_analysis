@@ -1,0 +1,28 @@
+parm final.prmtop [sys]
+# only use the second half of the trajectory for analysis
+trajin 8_prod2.nc 5000 last parm [sys]
+autoimage anchor "::A,B,C,D,E,F,G,H"
+
+reference 7_eq.pdb parm [sys]
+
+# alignment
+rms "::A,B,C,D,E,F,G,H & :;64-86,295-321,353-377,383-406,409-448,457-469,472-483,488-525 & @CA,C,N,O" reference
+
+# calculate correlaion matrix
+# intra-monomer correlation matrix
+matrix correl "::A,E & @CA & !:AQV,ZB4,LIG" "::A,E & @CA & !:AQV,ZB4,LIG" out covar_AE_prod2.dat
+matrix correl "::B,F & @CA & !:AQV,ZB4,LIG" "::B,F & @CA & !:AQV,ZB4,LIG" out covar_BF_prod2.dat
+matrix correl "::C,G & @CA & !:AQV,ZB4,LIG" "::C,G & @CA & !:AQV,ZB4,LIG" out covar_CG_prod2.dat
+matrix correl "::D,H & @CA & !:AQV,ZB4,LIG" "::D,H & @CA & !:AQV,ZB4,LIG" out covar_DH_prod2.dat
+
+# inter-monomer correlation matrix
+matrix correl "::A,E & @CA & !:AQV,ZB4,LIG" "::B,F & @CA & !:AQV,ZB4,LIG" out covar_AE_BF_prod2.dat
+matrix correl "::A,E & @CA & !:AQV,ZB4,LIG" "::C,G & @CA & !:AQV,ZB4,LIG" out covar_AE_CG_prod2.dat
+matrix correl "::A,E & @CA & !:AQV,ZB4,LIG" "::D,H & @CA & !:AQV,ZB4,LIG" out covar_AE_DH_prod2.dat
+
+matrix correl "::B,F & @CA & !:AQV,ZB4,LIG" "::C,G & @CA & !:AQV,ZB4,LIG" out covar_BF_CG_prod2.dat
+matrix correl "::B,F & @CA & !:AQV,ZB4,LIG" "::D,H & @CA & !:AQV,ZB4,LIG" out covar_BF_DH_prod2.dat
+
+matrix correl "::C,G & @CA & !:AQV,ZB4,LIG" "::D,H & @CA & !:AQV,ZB4,LIG" out covar_CG_DH_prod2.dat
+
+run
