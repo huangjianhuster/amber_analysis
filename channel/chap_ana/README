@@ -1,0 +1,22 @@
+1. requirement
+    final.prmtop
+    7_eq.pdb
+    8_prod1.nc
+    8_prod2.nc
+    8_prod3.nc
+    8_prod1.rst
+
+2. run
+    bash chap_ana.sh &
+
+3. chap container
+    module load singularity/2.6.1
+    singularity shell --nv /home/huanjia9/programs/chap/chap_singularity_version2.simg    
+    
+    chap -s for_chap.gro -f all_merged_TMaligned.xtc -out-filename all_merged -n index.ndx -pf-sel-ipp -pf-max-free-dist 1.5 -sel-solvent
+    <-- select "gate"
+    <-- select "protein"
+
+4. plot
+    mamba activate smi
+    python chap_pore_plt.py all_merged.json chap_results
