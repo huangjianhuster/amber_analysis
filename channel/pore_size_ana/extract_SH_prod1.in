@@ -1,0 +1,13 @@
+parm final.prmtop [sys]
+trajin 8_prod1.nc 5000 last 10 parm [sys]
+autoimage anchor "::A,B,C,D,E,F,G,H"
+
+reference 7_eq.pdb parm [sys]
+
+# alignment
+rms "::A,B,C,D,E,F,G,H & (!:AQV,ZB4,LIG) & :;64-86,295-321,353-377,383-406,409-448,457-469,472-483,488-525 & @CA,C,N,O" reference
+
+# only keep protein and ligand
+strip "!::A,B,C,D,E,F,G,H"
+trajout 8_prod1_pro_secondhalf.nc netcdf
+run
