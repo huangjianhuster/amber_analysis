@@ -1,0 +1,13 @@
+parm final.prmtop [sys]
+trajin 7_eq.pdb parm [sys]
+
+# only keep protein and ligand
+strip "!::A,B,C,D,E,F,G,H"
+trajout 7_eq_pro.pdb pdb
+
+# save a new prmtop only containing the protein/ligand part
+# to be consistent wit the truncated trajectory
+parm final.prmtop [sys2]
+parmstrip "!::A,B,C,D,E,F,G,H" parm [sys2]
+parmwrite out pro.prmtop parm [sys2]
+run
