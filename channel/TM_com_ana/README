@@ -1,0 +1,13 @@
+1. requirements
+    final.prmtop [your current lig-bound system]
+    8_prod1.nc
+    8_prod2.nc
+    8_prod3.nc
+    7_eq.pdb
+    
+    # from apo system
+    7_eq_apo.pdb
+    apo.prmtop
+
+2. run
+    bash TM_com_ana.sh &
