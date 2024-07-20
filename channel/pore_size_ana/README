@@ -1,0 +1,11 @@
+1. requirement
+    final.prmtop
+    8_prod1.nc
+    8_prod2.nc
+    8_prod3.nc
+    7_eq.pdb
+    7_eq_apo.pdb    (from apo system)
+    apo.prmtop (from apo system --> final.prmtop)   
+ 
+2. run
+    bash pore_ana.sh &
