@@ -1,0 +1,19 @@
+parm final.prmtop [lig_system]
+# trajin 8_prod1.nc 1 last 20 parm [lig_system]
+trajin 7_eq.rst parm [lig_system]
+autoimage anchor "::A,B,C,D,E,F,G,H"
+
+parm apo.prmtop [apo_system]
+reference 7_eq_apo.pdb parm [apo_system]
+
+# alignment
+rms "(::A,B,C,D,E,F,G,H) & (!:I0I,IOL,LIG) & (:;64-86,295-321,353-377,383-406,409-448,457-469,472-483,488-525) & (@CA,C,N,O)" reference
+
+strip "!::A,B,C,D,E,F,G,H"
+# trajout test.nc netcdf
+trajout aligned.pdb pdb
+
+parm final.prmtop [system2]
+parmstrip "!::A,B,C,D,E,F,G,H" parm [system2]
+parmwrite out aligned.prmtop parm [system2]
+run
