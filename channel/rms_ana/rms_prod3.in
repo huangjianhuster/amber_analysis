@@ -1,0 +1,26 @@
+parm final.prmtop
+trajin 8_prod3.nc 1 last 10
+
+
+reference 7_eq.rst
+
+# alignment
+rms "::A,B,C,D,E,F,G,H & :;64-86,295-321,353-377,383-406,409-448,457-469,472-483,488-525 & @CA,C,N,O" reference
+
+# RMSD calculation for protein backbone, TM backbone, cap backbone
+rms "::A,B,C,D,E,F,G,H & :;64-86,295-321,353-377,383-406,409-448,457-469,472-483,488-525 & @CA,C,N,O" reference nofit out rmsd_TM_bb_prod3.dat
+rms "::A,B,C,D,E,F,G,H & @CA,C,N,O" reference nofit out rmsd_pro_bb_prod3.dat
+rms "::A,B,C,D,E,F,G,H & :;87-294 & @CA,C,N,O" reference nofit out rmsd_cap_bb_prod3.dat
+
+# RMSF calculation
+atomicfluct byres out rmsf_A_prod3.dat "::A,E"
+atomicfluct byres out rmsf_B_prod3.dat "::B,F"
+atomicfluct byres out rmsf_C_prod3.dat "::C,G"
+atomicfluct byres out rmsf_D_prod3.dat "::D,H"
+
+# ligand
+rms "::A & :lig & !@H=" reference nofit out rms_lig_A_prod3.dat
+rms "::B & :lig & !@H=" reference nofit out rms_lig_B_prod3.dat
+rms "::C & :lig & !@H=" reference nofit out rms_lig_C_prod3.dat
+rms "::D & :lig & !@H=" reference nofit out rms_lig_D_prod3.dat
+run
