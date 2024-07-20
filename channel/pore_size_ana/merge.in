@@ -1,0 +1,7 @@
+parm pro.prmtop [pro]
+trajin 8_prod1_pro_secondhalf.nc parm [pro]
+trajin 8_prod2_pro_secondhalf.nc parm [pro]
+trajin 8_prod3_pro_secondhalf.nc parm [pro]
+
+trajout secondhalf_merged.nc
+run
