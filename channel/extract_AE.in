@@ -1,0 +1,5 @@
+parm final.prmtop
+trajin 7_eq.rst
+strip "!::A,E"
+trajout AE.pdb pdb
+run
