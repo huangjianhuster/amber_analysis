@@ -1,0 +1,12 @@
+1.requirement
+    final.prmtop
+    8_prod1.nc
+    8_prod2.nc
+    8_prod3.nc
+    7_eq.pdb 
+
+2. run
+    bash covar_cal.sh &
+
+    # plot; change to dat file to plot different matrices
+    gnuplot -p -c plot.gnu covar_AE_prod1.dat
