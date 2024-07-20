@@ -1,0 +1,44 @@
+1. Protein feature
+    1.1 alignment
+    # use transmembrane region:
+    Helix 1: C64 --> S86   [whole length: C64 --> F105]
+    Helix 2: N295 --> L321 [whole length: N295 --> R336]
+    Helix 3: G353 --> A377 [same as whole length]
+    Helix 4: Y383 --> T406 [same as whole length]
+    Helix 5: H409 --> G448 [same as whole length; including S4-5 linker]
+    pore helix1: L457 --> N469
+    pore helix2: D472 --> Q483
+    Helix 6: S488 --> K525 [same as whole length]
+   
+    # vmd selection
+    protein and resid 64 to 86 295 to 321 353 to 377 383 to 406 409 to 448 457 to 469 472 to 483 488 to 525
+
+    1.2 pore lining residues
+        I506
+        L510
+        I514
+        T518
+        D522
+        
+    1.3 pore gate and SF
+        Gate: I514~T518
+        Selectivity filter: N469, G470, D471, D472 
+        
+
+2. analysis and scripts
+
+    2.1 convert rst to pdb
+        rst2pdb.in
+
+    2.2 rmsd, rmsf calculation and plot
+        rms_prod1.in
+        rmsd_lig_plt.py
+        rmsd_pro_plt.py 
+
+    2.3 align and truncate system to PROTEIN + LIGAND
+        align2eq.in
+
+    2.4 contact analysis [mamba env: smi]
+        # getcontacts; github
+        get_dynamic_contacts.py
+        get_contact_frequencies.py
