@@ -1,0 +1,12 @@
+parm final.prmtop [sys]
+trajin 7_eq.pdb parm [sys]
+
+parm apo.prmtop [apo]
+reference 7_eq_apo.pdb parm [apo]
+
+# alignment
+rms "::A,B,C,D,E,F,G,H & (!:AQV,ZB4,LIG) & :;64-86,295-321,353-377,383-406,409-448,457-469,472-483,488-525 & @CA,C,N,O" reference
+
+# align to apo  
+trajout 7_eq_align2apo.pdb pdb
+run
