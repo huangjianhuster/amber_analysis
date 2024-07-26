@@ -1,0 +1,79 @@
+# 1. get 100ns frame
+cpptraj -i extract_f100ns.in
+
+# 2. select sodium ions to pull
+# Info) molecule id: 0
+# Info) trajectory frame: 0
+# Info) name: Na+
+# Info) type: Na+
+# Info) index: 88187
+# Info) residue: 2383
+# Info) resname: Na+
+# Info) resid: 0
+# Info) chain: *
+# Info) segname: 
+# Info) x: 66.289001
+# Info) y: 61.889999
+# Info) z: 15.800000
+
+# 3. check the index using ambmask
+ambmask -p final.prmtop -c 100ns.rst -find "@88194"
+# ATOM  88194 Na+  Na+  3246      64.389  63.720  69.356                      Na
+
+# VMD atom index starts from 0; whereas amber starts at 1
+# index: 88193 (in VMD) should be index: 88194 (in amber)
+
+# 4. set up positional restraints for S6 and SF
+#   S6 residues: 488 ~ 525
+#   SF residues: 469 ~ 472 
+# amber mask: ':915-918,934-971,1228-1231,1247-1284,1541-1544,1560-1597,1854-1857,1873-1910@CA,N,C,O'
+# <--  you can use ../../md/system/sys2/resid.info
+
+
+# 5. distance restraints
+ambmask -p final.prmtop -c 100ns.rst -find :915-918,1228-1231,1541-1544,1854-1857@CA -out pdb > SF.pdb
+ambmask -p final.prmtop -c 100ns.rst -find :918,1231,1544,1857@CA -out pdb > SF_resid672.pdb
+grep ATOM SF.pdb | awk '{printf "%s%s", sep, $2; sep=","} END { print ""}'
+
+ambmask -p final.prmtop -c 100ns.rst -find :964,1277,1590,1903@CA,C,N,O -out pdb > gate518.pdb
+
+
+# 6. run pull simulation
+# 6.1 use 'jar' function in amber:
+bash run_pull.sh &
+    <-- this will call pull_jar.in
+
+# 6.2 use &smd namespace in amber:
+bash run_pull_smd.sh &
+    <-- this will call pull_smd.in 
+    <-- generate: smd.txt
+   
+# 6.3 this is due to different frq of outputing frames and smd.txt recordings
+grep -v "#" smd2.txt | awk 'NR % 5 == 1 {print $2}' | awk '{print NR, '\t', $0}' > smd2_match_nc.txt
+
+# 6.4 tracking the pulling via gnuplot
+# p "smd.txt" u 1:2
+
+# 7. extract frames
+
+bash extract_frames.sh final.prmtop pull_smd2.nc 2 0.0
+bash extract_frames.sh final.prmtop pull_smd2.nc 11 2.0
+bash extract_frames.sh final.prmtop pull_smd2.nc 21 4.0
+bash extract_frames.sh final.prmtop pull_smd2.nc 33 6.0
+bash extract_frames.sh final.prmtop pull_smd2.nc 42 8.0
+bash extract_frames.sh final.prmtop pull_smd2.nc 52 10.0
+bash extract_frames.sh final.prmtop pull_smd2.nc 62 12.0
+bash extract_frames.sh final.prmtop pull_smd2.nc 72 14.0
+bash extract_frames.sh final.prmtop pull_smd2.nc 82 16.0
+bash extract_frames.sh final.prmtop pull_smd2.nc 92 18.0
+bash extract_frames.sh final.prmtop pull_smd2.nc 102 20.0
+bash extract_frames.sh final.prmtop pull_smd2.nc 112 22.0
+bash extract_frames.sh final.prmtop pull_smd2.nc 122 24.0
+bash extract_frames.sh final.prmtop pull_smd2.nc 132 26.0
+bash extract_frames.sh final.prmtop pull_smd2.nc 142 28.0
+bash extract_frames.sh final.prmtop pull_smd2.nc 152 30.0
+bash extract_frames.sh final.prmtop pull_smd2.nc 162 32.0
+bash extract_frames.sh final.prmtop pull_smd2.nc 172 34.0
+bash extract_frames.sh final.prmtop pull_smd2.nc 182 36.0
+bash extract_frames.sh final.prmtop pull_smd2.nc 192 38.0
+bash extract_frames.sh final.prmtop pull_smd2.nc 200 40.0
