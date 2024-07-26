@@ -1,0 +1,16 @@
+# 1. deal with raw PDB
+sed s/HIE/HIS/g pro_clean.pdb > for_chap.pdb
+sed -i s/CYX/CYS/g for_chap.pdb
+sed -i s/ACE/ALA/g for_chap.pdb
+sed -i s/NME/ALA/g for_chap.pdb
+
+# 2. CHAP calculation
+# module load singularity/2.6.1
+# singularity shell --nv /home/huanjia9/programs/chap/chap_singularity_version2.simg
+# chap -s for_chap.pdb 
+
+# 3. VMD
+# vmd -e visualise_pathway.tcl 
+#  pore region: protein and chain E G and resid 456 to 526
+#
+#  WOBJ::draw_wobj $obj "avg_pl_hydrophobicity"
