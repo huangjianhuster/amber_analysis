@@ -1,0 +1,7 @@
+1. requiremnets
+    system_gmx.top
+    system_gmx.gro
+    all_merged_TMaligned.xtc
+
+2. run
+    bash run_density_map.sh &
