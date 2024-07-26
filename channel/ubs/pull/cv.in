@@ -1,0 +1,11 @@
+cv_file
+&colvar
+    cv_type = 'COM_DISTANCE'
+    cv_ni = 7
+    cv_i =  14654,19732,24810,29888, 0, 88194, 0
+    npath = 2
+    path = 0, 40
+    path_mode='LINES'
+    nharm = 1
+    harm = 100
+/
