@@ -1,0 +1,8 @@
+parm final.prmtop [sys]
+# read in ns frames
+trajin 8_prod1.nc 2000 2000 parm [sys]
+
+# output
+trajout 100ns.pdb PDB
+trajout 100ns.crd crd
+trajout 100ns.rst restart
