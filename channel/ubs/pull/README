@@ -42,6 +42,8 @@ ambmask -p final.prmtop -c 100ns.rst -find :964,1277,1590,1903@CA,C,N,O -out pdb
 # 6.1 use 'jar' function in amber:
 bash run_pull.sh &
     <-- this will call pull_jar.in
+    of note, the "jar" function in amber can only set one restraint.
+    usually I recommend using &smd namespace to do steered MD.
 
 # 6.2 use &smd namespace in amber:
 bash run_pull_smd.sh &
