@@ -1,0 +1,70 @@
+A NPT simulation for common production-level simulations
+ &cntrl
+    imin=0,        ! No minimization
+    irest=0,       ! This is NOT a restart of an old MD simulation
+    ntx=1,         ! So our inpcrd file has no velocities
+
+    ! Temperature control
+    ntt=3,         ! Langevin dynamics
+    gamma_ln=1.0,  ! Friction coefficient (ps^-1)
+    temp0=303.15,   ! Target temperature
+
+    ! Potential energy control
+    cut=9.0,      ! nonbonded cutoff, in angstroms
+
+    ! MD settings
+    nstlim=500000, ! 1 ns total
+    dt=0.002,      ! time step (ps)
+
+    ! SHAKE
+    ntc=2,         ! Constrain bonds containing hydrogen
+    ntf=2,         ! Do not calculate forces of bonds containing hydrogen
+
+    ! Control how often information is printed
+    ntpr=2500,     ! Print energies every 1000 steps
+    ntwx=2500,     ! Print coordinates every 25000 steps to the trajectory
+    ntwr=2500,    ! Print a restart file every 10K steps (can be less frequent)
+!   ntwv=-1,       ! Uncomment to also print velocities to trajectory
+!   ntwf=-1,       ! Uncomment to also print forces to trajectory
+    ntxo=2,        ! Write NetCDF format
+    ioutfm=1,      ! Write NetCDF format (always do this!)
+
+    ! Wrap coordinates when printing them to the same unit cell
+    iwrap=1,
+
+    ! Constant pressure control.
+    barostat=1,    ! MC barostat... change to 1 for Berendsen
+    ntp=3,         ! 1=isotropic, 2=anisotropic, 3=semi-isotropic w/ surften
+    pres0=1.0,     ! Target external pressure, in bar
+    taup=1.0
+
+    ! Constant surface tension (needed for semi-isotropic scaling). Uncomment
+    ! for this feature. csurften must be nonzero if ntp=3 above
+    csurften=3,    ! Interfaces in 1=yz plane, 2=xz plane, 3=xy plane
+    gamma_ten=0.0, ! Surface tension (dyne/cm). 0 gives pure semi-iso scaling
+    ninterface=2,  ! Number of interfaces (2 for bilayer)
+
+    ! Restraint options
+    ntr=1,         ! Positional restraints for proteins, sugars, ligands, and lipid head groups
+    nmropt=1,      ! Dihedral restraints for sugars and lipids
+    ! positional restraints on the SF region and S6 helix
+    restraint_wt=2.0, restraintmask=':915-918,934-971,1228-1231,1247-1284,1541-1544,1560-1597,1854-1857,1873-1910@CA,N,C,O',
+
+    ! Steered MD for pulling
+    infe=1,
+
+    ! Set water atom/residue names for SETTLE recognition
+    watnam='WAT',  ! Water residues are named WAT
+    owtnm='O',     ! Water oxygens are named O
+ /
+    &wt type='END', 
+/
+DISANG=dist_xy.rst
+LISTIN=POUT
+LISTOUT=POUT
+/
+&smd
+    output_file='smd.txt'
+    output_freq=500
+    cv_file='cv.in'
+/
